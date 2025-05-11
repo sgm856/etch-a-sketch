@@ -15,7 +15,7 @@ function getMainContainer() {
     return containerElement;
 }
 
-function initialize() {
+function initializePage() {
     addGrid(getMainContainer(), getSlider().value);
 }
 
