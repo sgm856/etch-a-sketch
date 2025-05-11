@@ -12,15 +12,16 @@ function getMainContainer() {
     if (!containerElement) {
         containerElement = document.querySelector(".main-container");
         containerElement.style.display = "flex";
-        containerElement.style.flex = "1 1 0";
-        containerElement.style.height = "100%";
-        containerElement.style.width = "100%";
+        containerElement.style.flex = "1 1 800";
+        containerElement.style.minHeight = "100vh";
+        containerElement.style.minWidth = "100vh";
+        containerElement.style.justifyContent = "center";
     }
     return containerElement;
 }
 
 function initializePage() {
-    addGrid(getMainContainer(), getSlider().value);
+    fillGrid(getMainContainer(), getSlider().value);
 }
 
 function getRandomRGBColor() {
@@ -32,40 +33,45 @@ function getRandomRGBColor() {
     return `rgb(${rgb.split(",")})`;
 }
 
-function createRow() {
+function createRow(dimension) {
     const row = document.createElement("div");
     row.classList.add("row");
     row.style.display = "flex";
     row.style.flex = "1";
+    row.style.minWidth = "100%";
+    row.style.maxHeight = `${(1 / dimension) * 100}%`;
     return row;
 }
 
-function addGrid(elem, dimension) {
-    debugger;
-    const defaultColor = "rgb(0, 0, 0)";
-    const grid = document.createElement("div");
+function styleGrid(grid) {
+    grid.classList.add("grid");
     grid.style.display = "flex";
     grid.style.flex = "1 1 0";
+    grid.style.justifyContent = "center";
     grid.style.flexDirection = "column";
-    grid.style.alignContent = "space-evenly";
-    grid.style.width = "100%";
-    grid.style.height = "100%";
+    grid.style.maxWidth = "65vh";
+    grid.style.maxHeight = "65vh";
+}
 
-    elem.style.display = "flex";
-    elem.style.flex = "1 1 auto";
-    elem.style.width = "100%";
-    elem.style.height = "100%";
-    elem.appendChild(grid);
+function fillGrid(container, dimension) {
+    debugger;
+    const defaultColor = "rgb(230, 230, 230)";
+    const grid = document.createElement("div");
+    styleGrid(grid);
+
+    dimension = 8;
+
+    container.appendChild(grid);
 
     for (let i = 0; i < dimension; i++) {
-        let row = createRow();
+        let row = createRow(dimension);
+
         for (let j = 0; j < dimension; j++) {
             const square = document.createElement("div");
             square.style.backgroundColor = defaultColor;
             square.style.display = "flex";
-            square.style.width = "16px";
-            square.style.flex = "1 1 0";
-            square.style.margin = "1px";
+            square.style.width = `${1 / dimension}%`;
+            square.style.flex = "1 1 auto";
             square.style.border = "1px solid black";
             row.appendChild(square);
         }
