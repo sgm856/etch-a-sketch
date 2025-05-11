@@ -49,7 +49,6 @@ function createResponsiveGrid(container, dimension) {
     if (dimension > MAX_DIMENSION) {
         dimension = MAX_DIMENSION;
     }
-    const defaultColor = "rgb(200, 200, 200)";
     const grid = document.createElement("div");
     grid.classList.add("grid");
 
@@ -58,11 +57,8 @@ function createResponsiveGrid(container, dimension) {
 
         for (let j = 0; j < dimension; j++) {
             const square = document.createElement("div");
-            square.style.backgroundColor = defaultColor;
-            square.style.display = "flex";
-            square.style.flex = "1 1 auto";
-            square.style.border = "1px solid black";
-            square.style.opacity = "10%";
+            square.classList.add("grid-square");
+            square.style.opacity = ".1";
             square.addEventListener("mouseenter", (e) => {
                 square.style.opacity = `${parseFloat(square.style.opacity) + .1}`;
                 square.style.backgroundColor = `rgb(${Math.random() * 256 | 0},${Math.random() * 256 | 0},${Math.random() * 256 | 0})`;

@@ -42,3 +42,10 @@ h1 {
     max-height: 65vh;
     border: 1px solid black;
 }
+
+.grid-square {
+    background-color: rgb(200, 200, 200);
+    display: flex;
+    flex: 1 1 auto;
+    border: 1px solid black;
+}
