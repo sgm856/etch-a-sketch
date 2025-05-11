@@ -10,7 +10,7 @@ function getSlider() {
 
 function getMainContainer() {
     if (!containerElement) {
-        containerElement = document.querySelector("main-container");
+        containerElement = document.querySelector(".main-container");
     }
     return containerElement;
 }
@@ -28,19 +28,31 @@ function getRandomRGBColor() {
     return `rgb(${rgb.split(",")})`;
 }
 
-function addGrid(elem, dimension) {
-    const defaultColor = rgb(0, 0, 0);
-    if (!grid) {
-        const grid = document.createElement("div");
-        grid.classList("grid");
-        grid.setAttribute("display: flex 1 1 0");
-        getMainContainer.appendChild(grid);
-    }
-    const square = document.createElement("div");
-    square.setAttribute(`background-color: ${defaultColor}`);
-    for (let i = 0; i < dimension; i++) {
-        for (let i = 0; i < dimension; i++) {
+function createRow() {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    row.setAttribute("display: flex 1");
+    return row;
+}
 
+function addGrid(elem, dimension) {
+    debugger;
+    const defaultColor = `rgb(0, 0, 0)`;
+    const grid = document.createElement("div");
+    grid.classList.add("grid");
+    grid.setAttribute("display", "flex 1 1 0");
+    getMainContainer().appendChild(grid);
+
+    for (let i = 0; i < dimension; i++) {
+        let row = createRow();
+        for (let i = 0; i < dimension; i++) {
+            const square = document.createElement("div");
+            square.setAttribute(`background-color: ${defaultColor}`);
+            square.setAttribute(`display: flex 1 1 1`);
+            row.appendChild(square);
         }
+        getMainContainer().appendChild(row);
     }
 }
+
+initializePage();
