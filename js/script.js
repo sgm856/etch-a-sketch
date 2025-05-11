@@ -3,7 +3,7 @@ let containerElement = null;
 
 function getSlider() {
     if (!sliderElement) {
-        sliderElement = document.querySelector("slider");
+        sliderElement = document.querySelector(".slider");
     }
     return sliderElement;
 }
