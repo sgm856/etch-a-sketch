@@ -51,6 +51,7 @@ function styleGrid(grid) {
     grid.style.flexDirection = "column";
     grid.style.maxWidth = "65vh";
     grid.style.maxHeight = "65vh";
+    grid.style.border = "1px solid black";
 }
 
 function fillGrid(container, dimension) {
