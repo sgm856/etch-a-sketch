@@ -12,6 +12,7 @@ function getSlider() {
 function getMainContainer() {
     if (!containerElement) {
         containerElement = document.querySelector(".main-container");
+        styleMainContainer(containerElement);
     }
     return containerElement;
 }
@@ -29,6 +30,7 @@ function styleControlArea() {
         controlsContainer = document.querySelector(".controls-container");
         controlsContainer.style.display = "flex";
         controlsContainer.style.flex = "0 0 auto";
+        controlsContainer.style.flexDirection = "column";
         controlsContainer.style.justifyContent = "center";
         controlsContainer.style.alignContent = "center";
         slider = document.querySelector(".slider");
@@ -37,15 +39,13 @@ function styleControlArea() {
 }
 
 function initializePage() {
-    let mainContainer = getMainContainer();
-    styleMainContainer(mainContainer);
-    createGrid(mainContainer, getSlider().value);
+    createResponsiveGrid(getMainContainer(), getSlider().value);
 }
 
 function getRandomRGBColor() {
     let rgb = [0, 0, 0];
     for (let i = 0; i < rgb.length; i++) {
-        let randomValue = floor(Math.random() * 256);
+        let randomValue = Math.floor(Math.random() * 256);
         rgb[i] = randomValue;
     }
     return `rgb(${rgb.join(",")})`;
@@ -72,9 +72,13 @@ function styleGrid(grid) {
     grid.style.border = "1px solid black";
 }
 
-function createGrid(container, dimension) {
+function createResponsiveGrid(container, dimension) {
     debugger;
-    const defaultColor = "rgb(230, 230, 230)";
+    let MAX_DIMENSION = 100;
+    if (dimension > MAX_DIMENSION) {
+        dimension = MAX_DIMENSION;
+    }
+    const defaultColor = "rgb(200, 200, 200)";
     const grid = document.createElement("div");
     styleGrid(grid);
 
@@ -89,11 +93,19 @@ function createGrid(container, dimension) {
             square.style.display = "flex";
             square.style.flex = "1 1 auto";
             square.style.border = "1px solid black";
+            square.style.opacity = "10%";
+            square.addEventListener("mouseenter", (e) => {
+                square.style.opacity = `${Math.min(parseFloat(square.style.opacity) + .1, 1)}`;
+                square.style.backgroundColor = getRandomRGBColor();
+            })
+
             row.appendChild(square);
         }
         grid.appendChild(row);
     }
 }
+
+
 
 initializePage();
 styleControlArea();
