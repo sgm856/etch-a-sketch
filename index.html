@@ -13,8 +13,10 @@
     <h1>Etch-a-sketch</h1>
     <div class="main-container"></div>
     <div class="controls-container">
-        <p>Dimension: </p>
-        <input type="range" class="slider" min="8" max="100" value="32" step="4">
+        <div class="slide-container">
+            <label class="slider-label" id="dimension-label" for="grid-slider"></label>
+            <input type="range" class="slider" id="grid-slider" min="8" max="100" value="32" step="4">
+        </div>
     </div>
     </div>
 </body>

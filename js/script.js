@@ -1,6 +1,6 @@
 let sliderElement = null;
 let containerElement = null;
-let controlsContainer = null;
+let sliderContainer = null;
 
 function getSlider() {
     if (!sliderElement) {
@@ -12,30 +12,21 @@ function getSlider() {
 function getMainContainer() {
     if (!containerElement) {
         containerElement = document.querySelector(".main-container");
-        styleMainContainer(containerElement);
     }
     return containerElement;
 }
 
-function styleMainContainer(mainContainer) {
-    mainContainer.style.display = "flex";
-    mainContainer.style.flex = "0 0 auto";
-    mainContainer.style.minHeight = "60vh";
-    mainContainer.style.maxHeight = "60vh";
-    mainContainer.style.justifyContent = "center";
-}
+function initializeControlArea() {
+    slider = document.querySelector("#grid-slider");
+    label = document.querySelector("#dimension-label");
 
-function styleControlArea() {
-    if (!controlsContainer) {
-        controlsContainer = document.querySelector(".controls-container");
-        controlsContainer.style.display = "flex";
-        controlsContainer.style.flex = "0 0 auto";
-        controlsContainer.style.flexDirection = "column";
-        controlsContainer.style.justifyContent = "center";
-        controlsContainer.style.alignContent = "center";
-        slider = document.querySelector(".slider");
-        slider.style.margin = "32px";
-    }
+    label.textContent = `Dimensions: ${slider.value} x ${slider.value}`;
+
+    slider.addEventListener("input", () => {
+        label.textContent = `Dimensions: ${slider.value} x ${slider.value}`;
+
+        updateGrid(slider.value);
+    });
 }
 
 function initializePage() {
@@ -61,17 +52,6 @@ function createRow(dimension) {
     return row;
 }
 
-function styleGrid(grid) {
-    grid.classList.add("grid");
-    grid.style.display = "flex";
-    grid.style.flex = "1 1 0";
-    grid.style.justifyContent = "center";
-    grid.style.flexDirection = "column";
-    grid.style.maxWidth = "65vh";
-    grid.style.maxHeight = "65vh";
-    grid.style.border = "1px solid black";
-}
-
 function createResponsiveGrid(container, dimension) {
     debugger;
     let MAX_DIMENSION = 100;
@@ -80,7 +60,7 @@ function createResponsiveGrid(container, dimension) {
     }
     const defaultColor = "rgb(200, 200, 200)";
     const grid = document.createElement("div");
-    styleGrid(grid);
+    grid.classList.add("grid");
 
     container.appendChild(grid);
 
@@ -108,4 +88,4 @@ function createResponsiveGrid(container, dimension) {
 
 
 initializePage();
-styleControlArea();
+initializeControlArea();

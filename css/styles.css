@@ -1,3 +1,44 @@
 h1 {
     text-align: center;
 }
+
+.controls-container {
+    display: flex;
+    justify-content: center;
+}
+
+.slide-container {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    max-width: 60vh;
+}
+
+#dimension-label {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.slider {
+    margin: 32px;
+}
+
+.main-container {
+    display: flex;
+    flex: 0 0 auto;
+    min-height: 60vh;
+    max-height: 60vh;
+    justify-content: center;
+}
+
+.grid {
+    display: flex;
+    flex: 1 1 0;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 65vh;
+    max-height: 65vh;
+    border: 1px solid black;
+}
