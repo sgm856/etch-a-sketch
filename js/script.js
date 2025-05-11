@@ -31,7 +31,7 @@ function getRandomRGBColor() {
 function createRow() {
     const row = document.createElement("div");
     row.classList.add("row");
-    row.setAttribute("display: flex 1");
+    row.setAttribute("display", "flex 1");
     return row;
 }
 
@@ -47,8 +47,8 @@ function addGrid(elem, dimension) {
         let row = createRow();
         for (let i = 0; i < dimension; i++) {
             const square = document.createElement("div");
-            square.setAttribute(`background-color: ${defaultColor}`);
-            square.setAttribute(`display: flex 1 1 1`);
+            square.setAttribute("background-color", "${defaultColor}");
+            square.setAttribute("display", "flex 1 1 1");
             row.appendChild(square);
         }
         getMainContainer().appendChild(row);
