@@ -16,7 +16,7 @@ function initializeControlArea() {
 }
 
 function initializePage() {
-    createResponsiveGrid(getSlider().value);
+    createResponsiveGrid(sliderElement.value);
 }
 
 function createRow(dimension) {
