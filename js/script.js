@@ -30,9 +30,6 @@ function initializePage() {
 function createRow(dimension) {
     const row = document.createElement("div");
     row.classList.add("row");
-    row.style.display = "flex";
-    row.style.flex = "1";
-    row.style.minWidth = "100%";
     row.style.maxHeight = `${(1 / dimension) * 100}%`;
     return row;
 }
@@ -63,8 +60,7 @@ function createResponsiveGrid(dimension) {
     }
 
     if (currentGrid) {
-        mainContainer.insertBefore(grid, currentGrid);
-        mainContainer.removeChild(currentGrid);
+        mainContainer.replaceChild(grid, currentGrid);
         currentGrid = grid;
 
     } else {
