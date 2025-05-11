@@ -1,20 +1,13 @@
-let sliderElement = null;
-let containerElement = null;
-let sliderContainer = null;
+const sliderElement = document.querySelector(".slider");;
+const mainContainer = document.querySelector(".main-container");;
 let currentGrid = null;
 
 function getSlider() {
-    if (!sliderElement) {
-        sliderElement = document.querySelector(".slider");
-    }
     return sliderElement;
 }
 
 function getMainContainer() {
-    if (!containerElement) {
-        containerElement = document.querySelector(".main-container");
-    }
-    return containerElement;
+    return mainContainer;
 }
 
 function initializeControlArea() {
@@ -26,12 +19,12 @@ function initializeControlArea() {
     slider.addEventListener("input", () => {
         label.textContent = `Dimensions: ${slider.value} x ${slider.value}`;
 
-        createResponsiveGrid(getMainContainer(), slider.value);
+        createResponsiveGrid(slider.value);
     });
 }
 
 function initializePage() {
-    createResponsiveGrid(getMainContainer(), getSlider().value);
+    createResponsiveGrid(getSlider().value);
 }
 
 function createRow(dimension) {
@@ -44,8 +37,8 @@ function createRow(dimension) {
     return row;
 }
 
-function createResponsiveGrid(container, dimension) {
-    let MAX_DIMENSION = 100;
+function createResponsiveGrid(dimension) {
+    const MAX_DIMENSION = 100;
     if (dimension > MAX_DIMENSION) {
         dimension = MAX_DIMENSION;
     }
@@ -53,7 +46,7 @@ function createResponsiveGrid(container, dimension) {
     grid.classList.add("grid");
 
     for (let i = 0; i < dimension; i++) {
-        let row = createRow(dimension);
+        const row = createRow(dimension);
 
         for (let j = 0; j < dimension; j++) {
             const square = document.createElement("div");
@@ -70,12 +63,12 @@ function createResponsiveGrid(container, dimension) {
     }
 
     if (currentGrid) {
-        container.insertBefore(grid, currentGrid);
-        container.removeChild(currentGrid);
+        mainContainer.insertBefore(grid, currentGrid);
+        mainContainer.removeChild(currentGrid);
         currentGrid = grid;
 
     } else {
-        container.appendChild(grid);
+        mainContainer.appendChild(grid);
         currentGrid = grid;
     }
 }
