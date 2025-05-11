@@ -12,9 +12,9 @@ function getMainContainer() {
     if (!containerElement) {
         containerElement = document.querySelector(".main-container");
         containerElement.style.display = "flex";
-        containerElement.style.flex = "1 1 800";
-        containerElement.style.minHeight = "100vh";
-        containerElement.style.minWidth = "100vh";
+        containerElement.style.flex = "0 0 auto";
+        containerElement.style.minHeight = "60vh";
+        containerElement.style.maxHeight = "60vh";
         containerElement.style.justifyContent = "center";
     }
     return containerElement;
