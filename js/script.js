@@ -11,6 +11,10 @@ function getSlider() {
 function getMainContainer() {
     if (!containerElement) {
         containerElement = document.querySelector(".main-container");
+        containerElement.style.display = "flex";
+        containerElement.style.flex = "1 1 0";
+        containerElement.style.height = "100%";
+        containerElement.style.width = "100%";
     }
     return containerElement;
 }
@@ -31,30 +35,41 @@ function getRandomRGBColor() {
 function createRow() {
     const row = document.createElement("div");
     row.classList.add("row");
-    row.setAttribute("display", "flex 1");
+    row.style.display = "flex";
+    row.style.flex = "1";
     return row;
 }
 
 function addGrid(elem, dimension) {
     debugger;
-    const defaultColor = `rgb(0, 0, 0)`;
+    const defaultColor = "rgb(0, 0, 0)";
     const grid = document.createElement("div");
-    grid.classList.add("grid");
-    grid.setAttribute("display", "flex 1 1 0");
-    getMainContainer().appendChild(grid);
+    grid.style.display = "flex";
+    grid.style.flex = "1 1 0";
+    grid.style.flexDirection = "column";
+    grid.style.alignContent = "space-evenly";
+    grid.style.width = "100%";
+    grid.style.height = "100%";
+
+    elem.style.display = "flex";
+    elem.style.flex = "1 1 auto";
+    elem.style.width = "100%";
+    elem.style.height = "100%";
+    elem.appendChild(grid);
 
     for (let i = 0; i < dimension; i++) {
         let row = createRow();
-        for (let i = 0; i < dimension; i++) {
+        for (let j = 0; j < dimension; j++) {
             const square = document.createElement("div");
-            square.setAttribute("background-color", "${defaultColor}");
-            square.setAttribute("display", "flex 1 1 auto");
-            square.setAttribute("width", "1px");
-            square.setAttribute("height", "1px");
-            square.setAttribute("border-color", "black");
+            square.style.backgroundColor = defaultColor;
+            square.style.display = "flex";
+            square.style.width = "16px";
+            square.style.flex = "1 1 0";
+            square.style.margin = "1px";
+            square.style.border = "1px solid black";
             row.appendChild(square);
         }
-        getMainContainer().appendChild(row);
+        grid.appendChild(row);
     }
 }
 
