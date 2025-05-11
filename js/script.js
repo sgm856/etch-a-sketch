@@ -1,5 +1,6 @@
 let sliderElement = null;
 let containerElement = null;
+let controlsContainer = null;
 
 function getSlider() {
     if (!sliderElement) {
@@ -11,26 +12,43 @@ function getSlider() {
 function getMainContainer() {
     if (!containerElement) {
         containerElement = document.querySelector(".main-container");
-        containerElement.style.display = "flex";
-        containerElement.style.flex = "0 0 auto";
-        containerElement.style.minHeight = "60vh";
-        containerElement.style.maxHeight = "60vh";
-        containerElement.style.justifyContent = "center";
     }
     return containerElement;
 }
 
+function styleMainContainer(mainContainer) {
+    mainContainer.style.display = "flex";
+    mainContainer.style.flex = "0 0 auto";
+    mainContainer.style.minHeight = "60vh";
+    mainContainer.style.maxHeight = "60vh";
+    mainContainer.style.justifyContent = "center";
+}
+
+function styleControlArea() {
+    if (!controlsContainer) {
+        controlsContainer = document.querySelector(".controls-container");
+        controlsContainer.style.display = "flex";
+        controlsContainer.style.flex = "0 0 auto";
+        controlsContainer.style.justifyContent = "center";
+        controlsContainer.style.alignContent = "center";
+        slider = document.querySelector(".slider");
+        slider.style.margin = "32px";
+    }
+}
+
 function initializePage() {
-    fillGrid(getMainContainer(), getSlider().value);
+    let mainContainer = getMainContainer();
+    styleMainContainer(mainContainer);
+    createGrid(mainContainer, getSlider().value);
 }
 
 function getRandomRGBColor() {
     let rgb = [0, 0, 0];
     for (let i = 0; i < rgb.length; i++) {
-        let randomValue = floor(Math.random * 256);
+        let randomValue = floor(Math.random() * 256);
         rgb[i] = randomValue;
     }
-    return `rgb(${rgb.split(",")})`;
+    return `rgb(${rgb.join(",")})`;
 }
 
 function createRow(dimension) {
@@ -54,13 +72,11 @@ function styleGrid(grid) {
     grid.style.border = "1px solid black";
 }
 
-function fillGrid(container, dimension) {
+function createGrid(container, dimension) {
     debugger;
     const defaultColor = "rgb(230, 230, 230)";
     const grid = document.createElement("div");
     styleGrid(grid);
-
-    dimension = 8;
 
     container.appendChild(grid);
 
@@ -71,7 +87,6 @@ function fillGrid(container, dimension) {
             const square = document.createElement("div");
             square.style.backgroundColor = defaultColor;
             square.style.display = "flex";
-            square.style.width = `${1 / dimension}%`;
             square.style.flex = "1 1 auto";
             square.style.border = "1px solid black";
             row.appendChild(square);
@@ -81,3 +96,4 @@ function fillGrid(container, dimension) {
 }
 
 initializePage();
+styleControlArea();
