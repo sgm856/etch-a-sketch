@@ -2,14 +2,6 @@ const sliderElement = document.querySelector(".slider");;
 const mainContainer = document.querySelector(".main-container");;
 let currentGrid = null;
 
-function getSlider() {
-    return sliderElement;
-}
-
-function getMainContainer() {
-    return mainContainer;
-}
-
 function initializeControlArea() {
     slider = document.querySelector("#grid-slider");
     label = document.querySelector("#dimension-label");
