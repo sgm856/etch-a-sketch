@@ -1,6 +1,7 @@
 let sliderElement = null;
 let containerElement = null;
 let sliderContainer = null;
+let currentGrid = null;
 
 function getSlider() {
     if (!sliderElement) {
@@ -25,21 +26,12 @@ function initializeControlArea() {
     slider.addEventListener("input", () => {
         label.textContent = `Dimensions: ${slider.value} x ${slider.value}`;
 
-        updateGrid(slider.value);
+        createResponsiveGrid(getMainContainer(), slider.value);
     });
 }
 
 function initializePage() {
     createResponsiveGrid(getMainContainer(), getSlider().value);
-}
-
-function getRandomRGBColor() {
-    let rgb = [0, 0, 0];
-    for (let i = 0; i < rgb.length; i++) {
-        let randomValue = Math.floor(Math.random() * 256);
-        rgb[i] = randomValue;
-    }
-    return `rgb(${rgb.join(",")})`;
 }
 
 function createRow(dimension) {
@@ -53,7 +45,6 @@ function createRow(dimension) {
 }
 
 function createResponsiveGrid(container, dimension) {
-    debugger;
     let MAX_DIMENSION = 100;
     if (dimension > MAX_DIMENSION) {
         dimension = MAX_DIMENSION;
@@ -61,8 +52,6 @@ function createResponsiveGrid(container, dimension) {
     const defaultColor = "rgb(200, 200, 200)";
     const grid = document.createElement("div");
     grid.classList.add("grid");
-
-    container.appendChild(grid);
 
     for (let i = 0; i < dimension; i++) {
         let row = createRow(dimension);
@@ -75,17 +64,25 @@ function createResponsiveGrid(container, dimension) {
             square.style.border = "1px solid black";
             square.style.opacity = "10%";
             square.addEventListener("mouseenter", (e) => {
-                square.style.opacity = `${Math.min(parseFloat(square.style.opacity) + .1, 1)}`;
-                square.style.backgroundColor = getRandomRGBColor();
+                square.style.opacity = `${parseFloat(square.style.opacity) + .1}`;
+                square.style.backgroundColor = `rgb(${Math.random() * 256 | 0},${Math.random() * 256 | 0},${Math.random() * 256 | 0})`;
             })
 
             row.appendChild(square);
         }
         grid.appendChild(row);
     }
+
+    if (currentGrid) {
+        container.insertBefore(grid, currentGrid);
+        container.removeChild(currentGrid);
+        currentGrid = grid;
+
+    } else {
+        container.appendChild(grid);
+        currentGrid = grid;
+    }
 }
-
-
 
 initializePage();
 initializeControlArea();
