@@ -48,7 +48,10 @@ function addGrid(elem, dimension) {
         for (let i = 0; i < dimension; i++) {
             const square = document.createElement("div");
             square.setAttribute("background-color", "${defaultColor}");
-            square.setAttribute("display", "flex 1 1 1");
+            square.setAttribute("display", "flex 1 1 auto");
+            square.setAttribute("width", "1px");
+            square.setAttribute("height", "1px");
+            square.setAttribute("border-color", "black");
             row.appendChild(square);
         }
         getMainContainer().appendChild(row);
